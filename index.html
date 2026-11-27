@@ -3,24 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Evaluasi IPAS Kelas IV — Tumbuhan, Sumber Kehidupan di Bumi</title>
+  <title>Misi Penjaga Hutan — Gamifikasi IPAS Kelas IV</title>
   <style>
     :root {
-      --bg: #f3f9f4;
+      --bg-top: #dff4e6;
+      --bg-bottom: #f6fbf7;
       --surface: #ffffff;
-      --primary: #1f7a4c;
-      --primary-dark: #155c38;
-      --primary-light: #e6f4ec;
-      --accent: #e09f3e;
-      --text: #1c2b22;
-      --muted: #5a6e62;
-      --border: #d5e5db;
-      --danger: #c0392b;
-      --danger-bg: #fdecea;
-      --success: #1e8449;
-      --success-bg: #eafaf1;
-      --radius: 14px;
-      --shadow: 0 8px 24px rgba(21, 92, 56, 0.08);
+      --surface-soft: #f3faf5;
+      --primary: #1b7f4c;
+      --primary-dark: #135c37;
+      --primary-light: #e2f5ea;
+      --gold: #f59e0b;
+      --gold-soft: #fef3c7;
+      --sky: #0284c7;
+      --sky-soft: #e0f2fe;
+      --danger: #dc2626;
+      --danger-soft: #fee2e2;
+      --success: #16a34a;
+      --success-soft: #dcfce7;
+      --text: #172a1f;
+      --muted: #526a5c;
+      --border: #cde3d5;
+      --radius: 18px;
+      --shadow: 0 12px 30px rgba(19, 92, 55, 0.1);
     }
 
     * {
@@ -30,50 +35,73 @@
     body {
       margin: 0;
       font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
-      background: linear-gradient(180deg, #e9f6ee 0%, var(--bg) 100%);
+      background: linear-gradient(180deg, var(--bg-top) 0%, var(--bg-bottom) 100%);
       color: var(--text);
       min-height: 100vh;
-      line-height: 1.6;
+      line-height: 1.55;
     }
 
-    .container {
-      max-width: 820px;
+    .app-shell {
+      max-width: 920px;
       margin: 0 auto;
-      padding: 24px 16px 48px;
+      padding: 20px 16px 56px;
     }
 
-    header.hero {
-      background: linear-gradient(135deg, var(--primary) 0%, #2d935c 100%);
-      color: #ffffff;
-      padding: 28px 24px;
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      margin-bottom: 20px;
+    .hidden {
+      display: none !important;
     }
 
-    .badge {
-      display: inline-block;
-      background: rgba(255, 255, 255, 0.18);
-      padding: 4px 12px;
+    /* Top Bar */
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+    }
+
+    .brand-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      padding: 7px 14px;
       border-radius: 999px;
-      font-size: 0.82rem;
+      font-weight: 700;
+      font-size: 0.9rem;
+      color: var(--primary-dark);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+    }
+
+    .topbar-controls {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .icon-btn {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 7px 13px;
+      font-size: 0.85rem;
       font-weight: 600;
-      letter-spacing: 0.3px;
-      margin-bottom: 10px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s, border-color 0.15s;
     }
 
-    header.hero h1 {
-      margin: 0 0 6px;
-      font-size: 1.6rem;
-      line-height: 1.3;
+    .icon-btn:hover {
+      background: var(--primary-light);
+      border-color: var(--primary);
     }
 
-    header.hero p {
-      margin: 0;
-      opacity: 0.92;
-      font-size: 0.96rem;
-    }
-
+    /* Card */
     .card {
       background: var(--surface);
       border: 1px solid var(--border);
@@ -83,18 +111,49 @@
       margin-bottom: 18px;
     }
 
-    .hidden {
-      display: none !important;
+    /* Hero Welcome */
+    .hero-banner {
+      background: linear-gradient(135deg, #166534 0%, #1f8a52 60%, #2ca366 100%);
+      color: #ffffff;
+      border-radius: var(--radius);
+      padding: 26px 24px;
+      margin-bottom: 18px;
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
     }
 
+    .hero-banner h1 {
+      margin: 6px 0 8px;
+      font-size: 1.75rem;
+      line-height: 1.25;
+    }
+
+    .hero-banner p {
+      margin: 0;
+      opacity: 0.94;
+      max-width: 650px;
+    }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 4px 12px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    /* Form & Avatars */
     .form-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 14px;
-      margin-top: 16px;
+      margin-bottom: 18px;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 640px) {
       .form-grid {
         grid-template-columns: 1fr;
       }
@@ -103,17 +162,16 @@
     label.field-label {
       display: block;
       font-size: 0.9rem;
-      font-weight: 600;
+      font-weight: 700;
       margin-bottom: 6px;
-      color: var(--text);
     }
 
     input[type="text"] {
       width: 100%;
-      padding: 10px 12px;
-      border: 1.5px solid var(--border);
-      border-radius: 10px;
-      font-size: 0.95rem;
+      padding: 11px 14px;
+      border: 2px solid var(--border);
+      border-radius: 12px;
+      font-size: 0.96rem;
       color: var(--text);
       outline: none;
       transition: border-color 0.2s;
@@ -123,22 +181,79 @@
       border-color: var(--primary);
     }
 
+    .avatar-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 640px) {
+      .avatar-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .avatar-card {
+      border: 2px solid var(--border);
+      border-radius: 14px;
+      padding: 12px 10px;
+      text-align: center;
+      background: var(--surface-soft);
+      cursor: pointer;
+      transition: transform 0.15s, border-color 0.15s, background 0.15s;
+    }
+
+    .avatar-card:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary);
+    }
+
+    .avatar-card.selected {
+      border-color: var(--primary);
+      background: var(--primary-light);
+      box-shadow: 0 0 0 3px rgba(27, 127, 76, 0.15);
+    }
+
+    .avatar-emoji {
+      font-size: 2rem;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .avatar-name {
+      font-weight: 700;
+      font-size: 0.88rem;
+      display: block;
+    }
+
+    .avatar-role {
+      font-size: 0.76rem;
+      color: var(--muted);
+    }
+
+    /* Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 8px;
-      padding: 11px 20px;
-      border-radius: 10px;
+      padding: 12px 20px;
       border: none;
-      font-size: 0.95rem;
-      font-weight: 600;
+      border-radius: 12px;
+      font-size: 0.96rem;
+      font-weight: 700;
       cursor: pointer;
-      transition: background 0.2s, transform 0.1s;
+      transition: transform 0.1s, background 0.15s, opacity 0.15s;
     }
 
     .btn:active {
-      transform: translateY(1px);
+      transform: scale(0.98);
+    }
+
+    .btn:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
     }
 
     .btn-primary {
@@ -146,64 +261,243 @@
       color: #ffffff;
     }
 
-    .btn-primary:hover {
+    .btn-primary:hover:not(:disabled) {
       background: var(--primary-dark);
     }
 
-    .btn-secondary {
+    .btn-gold {
+      background: var(--gold);
+      color: #ffffff;
+    }
+
+    .btn-gold:hover:not(:disabled) {
+      background: #d97706;
+    }
+
+    .btn-soft {
       background: var(--primary-light);
       color: var(--primary-dark);
     }
 
-    .btn-secondary:hover {
-      background: #d3ebdc;
+    .btn-soft:hover:not(:disabled) {
+      background: #cbead8;
     }
 
-    .btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
+    /* HUD */
+    .hud-grid {
+      display: grid;
+      grid-template-columns: 1.3fr 2fr;
+      gap: 16px;
+      align-items: center;
+      margin-bottom: 18px;
     }
 
-    .progress-bar-wrap {
-      background: var(--primary-light);
+    @media (max-width: 720px) {
+      .hud-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .plant-stage-box {
+      background: linear-gradient(180deg, #effaf3 0%, #ddf3e4 100%);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .plant-svg-wrap {
+      width: 76px;
+      height: 76px;
+      flex-shrink: 0;
+      background: #ffffff;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    @media (max-width: 540px) {
+      .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    .stat-box {
+      background: var(--surface-soft);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 10px 12px;
+      text-align: center;
+    }
+
+    .stat-label {
+      font-size: 0.74rem;
+      color: var(--muted);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.4px;
+    }
+
+    .stat-value {
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: var(--primary-dark);
+      margin-top: 2px;
+    }
+
+    .hearts-row {
+      color: #ef4444;
+      letter-spacing: 1px;
+      font-size: 1.05rem;
+    }
+
+    /* World Map / Zone Selector */
+    .zones-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+    }
+
+    @media (max-width: 640px) {
+      .zones-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .zone-card {
+      border: 2px solid var(--border);
+      border-radius: 16px;
+      padding: 18px;
+      background: var(--surface);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      transition: transform 0.15s, border-color 0.15s;
+    }
+
+    .zone-card.unlocked:hover {
+      transform: translateY(-2px);
+      border-color: var(--primary);
+    }
+
+    .zone-card.completed {
+      border-color: var(--success);
+      background: #f5fdf7;
+    }
+
+    .zone-card.locked {
+      opacity: 0.62;
+      background: #f8faf9;
+    }
+
+    .zone-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .zone-badge {
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 3px 10px;
       border-radius: 999px;
-      height: 10px;
-      overflow: hidden;
-      margin: 12px 0 6px;
+      background: var(--primary-light);
+      color: var(--primary-dark);
     }
 
-    .progress-bar-fill {
-      background: var(--primary);
-      height: 100%;
-      width: 0%;
-      transition: width 0.25s ease;
+    .zone-card.completed .zone-badge {
+      background: var(--success-soft);
+      color: var(--success);
     }
 
-    .quiz-meta {
+    .zone-card.locked .zone-badge {
+      background: #e5e7eb;
+      color: #4b5563;
+    }
+
+    /* Play Screen */
+    .play-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       flex-wrap: wrap;
-      gap: 8px;
-      font-size: 0.88rem;
-      color: var(--muted);
-    }
-
-    .topic-tag {
-      display: inline-block;
-      background: var(--primary-light);
-      color: var(--primary-dark);
-      padding: 3px 10px;
-      border-radius: 999px;
-      font-size: 0.8rem;
-      font-weight: 600;
+      gap: 10px;
       margin-bottom: 10px;
     }
 
-    .question-text {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin: 6px 0 18px;
+    .progress-track {
+      height: 12px;
+      background: var(--primary-light);
+      border-radius: 999px;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary) 0%, #34d399 100%);
+      width: 0%;
+      transition: width 0.3s ease;
+    }
+
+    .powerups-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .powerup-btn {
+      border: 1.5px solid var(--border);
+      background: var(--surface-soft);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 6px 13px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .powerup-btn:hover:not(:disabled) {
+      border-color: var(--gold);
+      background: var(--gold-soft);
+    }
+
+    .powerup-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    .question-box {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin: 8px 0 18px;
+      color: var(--text);
+    }
+
+    .hint-box {
+      background: var(--sky-soft);
+      border-left: 4px solid var(--sky);
+      color: #0c4a6e;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 0.92rem;
+      margin-bottom: 14px;
     }
 
     .options-list {
@@ -216,109 +510,163 @@
       width: 100%;
       text-align: left;
       padding: 13px 16px;
-      border: 1.5px solid var(--border);
-      border-radius: 12px;
+      border: 2px solid var(--border);
+      border-radius: 14px;
       background: #ffffff;
       color: var(--text);
-      font-size: 0.96rem;
+      font-size: 0.98rem;
       cursor: pointer;
       display: flex;
-      align-items: flex-start;
+      align-items: center;
       gap: 12px;
-      transition: border-color 0.15s, background 0.15s;
+      transition: border-color 0.15s, background 0.15s, transform 0.1s;
     }
 
-    .option-btn:hover {
+    .option-btn:hover:not(:disabled) {
       border-color: var(--primary);
-      background: #f8fcfa;
+      background: var(--surface-soft);
     }
 
-    .option-btn.selected {
-      border-color: var(--primary);
-      background: var(--primary-light);
-      font-weight: 600;
+    .option-btn.eliminated {
+      opacity: 0.28;
+      text-decoration: line-through;
+      pointer-events: none;
+    }
+
+    .option-btn.is-correct {
+      border-color: var(--success);
+      background: var(--success-soft);
+      font-weight: 700;
+    }
+
+    .option-btn.is-wrong {
+      border-color: var(--danger);
+      background: var(--danger-soft);
     }
 
     .option-letter {
       flex-shrink: 0;
-      width: 28px;
-      height: 28px;
+      width: 30px;
+      height: 30px;
       border-radius: 50%;
       background: var(--primary-light);
       color: var(--primary-dark);
+      font-weight: 800;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700;
-      font-size: 0.88rem;
     }
 
-    .option-btn.selected .option-letter {
-      background: var(--primary);
-      color: #ffffff;
-    }
-
-    .nav-actions {
+    .fill-blank-wrap {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-top: 22px;
       gap: 10px;
       flex-wrap: wrap;
+      align-items: center;
     }
 
-    .dots-nav {
+    .fill-blank-wrap input {
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .feedback-panel {
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1.5px solid var(--border);
+      animation: popIn 0.2s ease;
+    }
+
+    .feedback-panel.correct {
+      background: var(--success-soft);
+      border-color: var(--success);
+    }
+
+    .feedback-panel.wrong {
+      background: var(--danger-soft);
+      border-color: var(--danger);
+    }
+
+    @keyframes popIn {
+      from {
+        opacity: 0;
+        transform: translateY(6px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Badges & Leaderboard */
+    .badges-row {
       display: flex;
       flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .badge-chip {
+      display: inline-flex;
+      align-items: center;
       gap: 6px;
-      margin-top: 16px;
-    }
-
-    .dot-btn {
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: #ffffff;
-      color: var(--muted);
-      font-size: 0.82rem;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    .dot-btn.answered {
-      background: var(--primary-light);
-      color: var(--primary-dark);
-      border-color: var(--primary);
-    }
-
-    .dot-btn.current {
-      background: var(--primary);
-      color: #ffffff;
-      border-color: var(--primary);
-    }
-
-    .score-banner {
-      text-align: center;
-      padding: 18px 12px;
+      padding: 7px 12px;
       border-radius: 12px;
-      background: var(--primary-light);
+      border: 1px solid var(--border);
+      background: #f8faf9;
+      color: var(--muted);
+      font-size: 0.84rem;
+      font-weight: 600;
+    }
+
+    .badge-chip.earned {
+      background: var(--gold-soft);
+      border-color: var(--gold);
+      color: #92400e;
+    }
+
+    table.lb-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 0.92rem;
+    }
+
+    table.lb-table th,
+    table.lb-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+
+    table.lb-table th {
+      background: var(--surface-soft);
+      color: var(--primary-dark);
+      font-weight: 700;
+    }
+
+    .certificate-box {
+      border: 3px double var(--primary);
+      background: linear-gradient(135deg, #ffffff 0%, #f1fbf4 100%);
+      border-radius: 18px;
+      padding: 26px 20px;
+      text-align: center;
       margin-bottom: 20px;
     }
 
-    .score-number {
-      font-size: 2.8rem;
-      font-weight: 800;
+    .certificate-score {
+      font-size: 3rem;
+      font-weight: 900;
       color: var(--primary-dark);
-      line-height: 1.1;
       margin: 6px 0;
+      line-height: 1.1;
     }
 
     .review-item {
       border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 16px;
-      margin-bottom: 12px;
+      padding: 14px;
+      margin-bottom: 10px;
     }
 
     .review-item.correct {
@@ -331,431 +679,1114 @@
       background: #fffafa;
     }
 
-    .review-status {
-      display: inline-block;
-      font-size: 0.78rem;
-      font-weight: 700;
-      padding: 2px 9px;
-      border-radius: 999px;
-      margin-bottom: 6px;
-    }
-
-    .review-status.correct {
-      background: var(--success-bg);
-      color: var(--success);
-    }
-
-    .review-status.wrong {
-      background: var(--danger-bg);
-      color: var(--danger);
-    }
-
-    .review-explanation {
-      margin-top: 8px;
-      font-size: 0.9rem;
-      color: var(--muted);
-      background: #f6faf7;
-      padding: 10px 12px;
-      border-radius: 8px;
-    }
-
-    .warning-text {
+    .error-msg {
       color: var(--danger);
       font-size: 0.88rem;
-      margin-top: 10px;
+      font-weight: 600;
+      margin-top: 8px;
+    }
+
+    @media print {
+      .topbar,
+      .no-print {
+        display: none !important;
+      }
+      body {
+        background: #ffffff;
+      }
+      .card {
+        box-shadow: none;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <header class="hero">
-      <div class="badge">IPAS Kelas IV • Kurikulum Merdeka</div>
-      <h1>Evaluasi: Tumbuhan, Sumber Kehidupan di Bumi</h1>
-      <p>Latihan soal interaktif Bab 1 (Bagian Tubuh Tumbuhan, Fotosintesis, dan Perkembangbiakan Tumbuhan)</p>
-    </header>
-
-    <!-- Layar Awal -->
-    <section id="start-screen" class="card">
-      <h2 style="margin-top: 0;">Identitas Siswa</h2>
-      <p style="color: var(--muted); margin-bottom: 8px;">
-        Evaluasi ini terdiri dari <strong>15 soal Pilihan Ganda</strong>. Bacalah setiap pertanyaan dengan teliti sebelum memilih jawaban.
-      </p>
-      <div class="form-grid">
-        <div>
-          <label class="field-label" for="student-name">Nama Lengkap</label>
-          <input type="text" id="student-name" placeholder="Contoh: Aisyah Putri" />
-        </div>
-        <div>
-          <label class="field-label" for="student-class">Kelas / Absen</label>
-          <input type="text" id="student-class" placeholder="Contoh: IV-A / 05" />
-        </div>
+  <div class="app-shell">
+    <!-- Top Bar -->
+    <div class="topbar">
+      <div class="brand-pill">🌱 Misi Penjaga Hutan • IPAS Kelas IV</div>
+      <div class="topbar-controls">
+        <button id="btn-sound" class="icon-btn" type="button">🔊 Suara: Aktif</button>
+        <button id="btn-open-lb" class="icon-btn" type="button">🏆 Papan Peringkat</button>
       </div>
-      <div id="start-error" class="warning-text hidden">Silakan isi nama lengkap terlebih dahulu.</div>
-      <div style="margin-top: 20px;">
-        <button id="btn-start" class="btn btn-primary" type="button">Mulai Mengerjakan</button>
+    </div>
+
+    <!-- SCREEN 1: Welcome & Avatar Selection -->
+    <section id="screen-welcome">
+      <div class="hero-banner">
+        <span class="hero-tag">GAMIFIKASI EVALUASI KURIKULUM MERDEKA</span>
+        <h1>Petualangan Tumbuhan: Sumber Kehidupan di Bumi</h1>
+        <p>
+          Rawat Biji Kehidupan menjadi Pohon Berbuah Lebat! Selesaikan 4 Zona Misi (15 Pilihan Ganda + 5 Tantangan Isian Boss), kumpulkan XP, bangun Combo, dan raih Lencana Penjaga Bumi.
+        </p>
+      </div>
+
+      <div class="card">
+        <h2 style="margin-top: 0;">1. Daftar sebagai Penjelajah</h2>
+        <div class="form-grid">
+          <div>
+            <label class="field-label" for="input-name">Nama Lengkap</label>
+            <input type="text" id="input-name" placeholder="Contoh: Raka Pratama" />
+          </div>
+          <div>
+            <label class="field-label" for="input-class">Kelas / Absen</label>
+            <input type="text" id="input-class" placeholder="Contoh: IV-B / 12" />
+          </div>
+        </div>
+
+        <label class="field-label">2. Pilih Karakter Penjelajah</label>
+        <div id="avatar-grid" class="avatar-grid"></div>
+
+        <div id="welcome-error" class="error-msg hidden">Mohon tulis nama lengkapmu sebelum memulai petualangan.</div>
+
+        <div style="margin-top: 20px; display: flex; gap: 10px; flex-wrap: wrap;">
+          <button id="btn-start-adventure" class="btn btn-primary" type="button">🚀 Mulai Petualangan</button>
+        </div>
       </div>
     </section>
 
-    <!-- Layar Kuis -->
-    <section id="quiz-screen" class="card hidden">
-      <div class="quiz-meta">
-        <span id="meta-student"></span>
-        <span id="meta-counter">Soal 1 dari 15</span>
-      </div>
-      <div class="progress-bar-wrap">
-        <div id="progress-fill" class="progress-bar-fill"></div>
-      </div>
+    <!-- SCREEN 2: World Map & HUD -->
+    <section id="screen-map" class="hidden">
+      <div class="card">
+        <div class="hud-grid">
+          <div class="plant-stage-box">
+            <div id="plant-svg-container" class="plant-svg-wrap"></div>
+            <div>
+              <div id="hud-player" style="font-weight: 800; font-size: 1rem;"></div>
+              <div id="hud-plant-stage" style="font-size: 0.86rem; color: var(--primary-dark); font-weight: 700;"></div>
+              <div id="hud-plant-progress" style="font-size: 0.8rem; color: var(--muted);"></div>
+            </div>
+          </div>
 
-      <div style="margin-top: 16px;">
-        <span id="q-topic" class="topic-tag"></span>
-        <div id="q-text" class="question-text"></div>
-        <div id="options-container" class="options-list"></div>
-      </div>
+          <div class="stats-grid">
+            <div class="stat-box">
+              <div class="stat-label">Poin XP</div>
+              <div id="hud-xp" class="stat-value">0</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Nyawa</div>
+              <div id="hud-hearts" class="stat-value hearts-row">❤️❤️❤️❤️❤️</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Combo</div>
+              <div id="hud-streak" class="stat-value">0x 🔥</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-label">Lencana</div>
+              <div id="hud-badges-count" class="stat-value">0 / 5</div>
+            </div>
+          </div>
+        </div>
 
-      <div id="quiz-warning" class="warning-text hidden"></div>
-
-      <div class="nav-actions">
-        <button id="btn-prev" class="btn btn-secondary" type="button">Sebelumnya</button>
-        <div style="display: flex; gap: 10px;">
-          <button id="btn-next" class="btn btn-primary" type="button">Selanjutnya</button>
-          <button id="btn-submit" class="btn btn-primary hidden" type="button">Selesai &amp; Nilai</button>
+        <div style="margin-bottom: 16px;">
+          <div style="font-size: 0.85rem; font-weight: 700; color: var(--muted);">Koleksi Lencana:</div>
+          <div id="badges-container" class="badges-row"></div>
         </div>
       </div>
 
-      <div style="margin-top: 20px; border-top: 1px solid var(--border); padding-top: 14px;">
-        <div style="font-size: 0.84rem; color: var(--muted); margin-bottom: 6px;">Navigasi Nomor Soal:</div>
-        <div id="dots-nav" class="dots-nav"></div>
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 14px;">
+          <div>
+            <h2 style="margin: 0;">Peta Petualangan</h2>
+            <p style="margin: 2px 0 0; color: var(--muted); font-size: 0.9rem;">
+              Selesaikan setiap zona secara berurutan untuk menumbuhkan Pohon Kehidupan!
+            </p>
+          </div>
+          <button id="btn-finish-early" class="btn btn-gold hidden" type="button">🎓 Lihat Sertifikat Akhir</button>
+        </div>
+
+        <div id="zones-grid" class="zones-grid"></div>
       </div>
     </section>
 
-    <!-- Layar Hasil -->
-    <section id="result-screen" class="card hidden">
-      <div class="score-banner">
-        <div id="result-identity" style="font-weight: 600; color: var(--muted);"></div>
-        <div id="result-score" class="score-number">0</div>
-        <div id="result-summary" style="font-size: 0.96rem;"></div>
-      </div>
+    <!-- SCREEN 3: Active Quiz Mission -->
+    <section id="screen-play" class="hidden">
+      <div class="card">
+        <div class="play-header">
+          <div>
+            <span id="play-zone-badge" class="zone-badge"></span>
+            <span id="play-counter" style="font-size: 0.88rem; color: var(--muted); font-weight: 600; margin-left: 8px;"></span>
+          </div>
+          <div style="display: flex; gap: 12px; align-items: center; font-weight: 700; font-size: 0.92rem;">
+            <span id="play-hearts">❤️❤️❤️❤️❤️</span>
+            <span id="play-xp" style="color: var(--primary-dark);">0 XP</span>
+            <span id="play-streak" style="color: #d97706;">0x 🔥</span>
+          </div>
+        </div>
 
-      <div style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;">
-        <button id="btn-retry" class="btn btn-primary" type="button">Ulangi Evaluasi</button>
-        <button id="btn-print" class="btn btn-secondary" type="button">Cetak Hasil</button>
-      </div>
+        <div class="progress-track">
+          <div id="play-progress" class="progress-fill"></div>
+        </div>
 
-      <h3 style="margin-top: 0;">Pembahasan Jawaban</h3>
-      <div id="review-list"></div>
+        <div class="powerups-bar">
+          <button id="pu-fifty" class="powerup-btn" type="button">🔍 50:50 (<span id="pu-fifty-count">2</span>)</button>
+          <button id="pu-hint" class="powerup-btn" type="button">💡 Petunjuk (<span id="pu-hint-count">2</span>)</button>
+          <button id="pu-heal" class="powerup-btn" type="button">💧 Air Segar +1 Nyawa (<span id="pu-heal-count">1</span>)</button>
+        </div>
+
+        <div id="play-hint-box" class="hint-box hidden"></div>
+        <div id="play-question" class="question-box"></div>
+
+        <!-- MCQ Options -->
+        <div id="play-options" class="options-list"></div>
+
+        <!-- Fill in the blank (Boss Zone) -->
+        <div id="play-fill-area" class="hidden">
+          <div class="fill-blank-wrap">
+            <input type="text" id="play-fill-input" placeholder="Ketik jawaban singkatmu di sini..." />
+            <button id="btn-submit-fill" class="btn btn-primary" type="button">Periksa Jawaban</button>
+          </div>
+          <div id="play-fill-error" class="error-msg hidden">Tuliskan jawaban terlebih dahulu.</div>
+        </div>
+
+        <!-- Feedback Panel -->
+        <div id="play-feedback" class="feedback-panel hidden">
+          <div id="feedback-title" style="font-weight: 800; font-size: 1rem; margin-bottom: 4px;"></div>
+          <div id="feedback-text" style="font-size: 0.93rem;"></div>
+          <div style="margin-top: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+            <span id="feedback-xp" style="font-weight: 700; font-size: 0.88rem;"></span>
+            <button id="btn-next-question" class="btn btn-primary" type="button">Lanjut Misi ➡️</button>
+          </div>
+        </div>
+
+        <div style="margin-top: 16px;">
+          <button id="btn-back-map" class="btn btn-soft" type="button">🗺️ Kembali ke Peta</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- SCREEN 4: Certificate & Full Review -->
+    <section id="screen-result" class="hidden">
+      <div class="card">
+        <div class="certificate-box">
+          <div style="font-size: 0.86rem; font-weight: 800; letter-spacing: 1px; color: var(--primary);">
+            SERTIFIKAT PENJAGA KEHIDUPAN BUMI
+          </div>
+          <h2 id="cert-name" style="margin: 8px 0 4px;"></h2>
+          <div id="cert-title" style="color: var(--muted); font-size: 0.95rem;"></div>
+          <div id="cert-score" class="certificate-score">0</div>
+          <div id="cert-stats" style="font-weight: 600; margin-bottom: 12px;"></div>
+          <div id="cert-badges" class="badges-row" style="justify-content: center;"></div>
+        </div>
+
+        <div class="no-print" style="display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px;">
+          <button id="btn-replay-all" class="btn btn-primary" type="button">🔄 Main Lagi dari Awal</button>
+          <button id="btn-return-map" class="btn btn-soft" type="button">🗺️ Kembali ke Peta</button>
+          <button id="btn-print-cert" class="btn btn-gold" type="button">🖨️ Cetak Sertifikat &amp; Pembahasan</button>
+        </div>
+
+        <h3 style="margin-top: 0;">Catatan Pembahasan Misi</h3>
+        <div id="result-review-list"></div>
+      </div>
+    </section>
+
+    <!-- SCREEN 5: Leaderboard Modal-like Section -->
+    <section id="screen-leaderboard" class="hidden">
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <h2 style="margin: 0;">🏆 Papan Peringkat Penjelajah (Lokal)</h2>
+          <div style="display: flex; gap: 8px;">
+            <button id="btn-clear-lb" class="icon-btn" type="button">🗑️ Reset Peringkat</button>
+            <button id="btn-close-lb" class="btn btn-primary" type="button">Tutup</button>
+          </div>
+        </div>
+        <p style="color: var(--muted); font-size: 0.9rem; margin-top: 6px;">
+          Skor tersimpan otomatis di browser perangkat ini setelah menyelesaikan seluruh petualangan.
+        </p>
+        <div id="leaderboard-body"></div>
+      </div>
     </section>
   </div>
 
   <script>
-    const QUESTIONS = [
+    const AVATARS = [
+      { id: "bibit", emoji: "🌱", name: "Penjaga Bibit", role: "Ahli Akar & Tanah" },
+      { id: "daun", emoji: "🍃", name: "Dokter Daun", role: "Peneliti Klorofil" },
+      { id: "lebah", emoji: "🐝", name: "Sahabat Lebah", role: "Pahlawan Penyerbuk" },
+      { id: "pohon", emoji: "🌳", name: "Ksatria Rimba", role: "Pelindung Hutan" }
+    ];
+
+    const ZONES = [
       {
-        topic: "Bagian Tubuh Tumbuhan",
-        question: "Bagian tumbuhan yang berfungsi menyerap air dan zat hara dari dalam tanah serta memperkokoh berdirinya tumbuhan adalah ....",
-        options: ["Daun", "Batang", "Akar", "Bunga"],
-        answer: 2,
-        explanation: "Akar berfungsi menyerap air dan zat hara (mineral) dari dalam tanah sekaligus memperkokoh berdirinya tumbuhan."
+        id: 0,
+        title: "Zona 1: Lembah Akar & Batang",
+        subtitle: "Kenali bagian tubuh tumbuhan dan fungsinya (5 Pilihan Ganda)",
+        icon: "🌿",
+        type: "mcq",
+        badgeId: "zone1",
+        questions: [
+          {
+            id: 1,
+            type: "mcq",
+            question: "Bagian tumbuhan yang berfungsi menyerap air dan zat hara dari dalam tanah serta memperkokoh berdirinya tumbuhan adalah ....",
+            options: ["Daun", "Batang", "Akar", "Bunga"],
+            answer: 2,
+            hint: "Bagian ini berada di dalam tanah dan menjadi penopang utama tumbuhan.",
+            explanation: "Akar berfungsi menyerap air dan zat hara (mineral) dari dalam tanah sekaligus memperkokoh berdirinya tumbuhan."
+          },
+          {
+            id: 2,
+            type: "mcq",
+            question: "Tumbuhan berikut ini yang memiliki jenis akar serabut adalah ....",
+            options: ["Mangga dan jambu", "Padi dan jagung", "Durian dan rambutan", "Jeruk dan nangka"],
+            answer: 1,
+            hint: "Carilah tumbuhan biji berkeping satu (monokotil) yang sering ditanam di sawah atau ladang.",
+            explanation: "Padi dan jagung termasuk tumbuhan monokotil yang memiliki akar serabut, sedangkan mangga, jambu, durian, rambutan, jeruk, dan nangka berakar tunggang."
+          },
+          {
+            id: 3,
+            type: "mcq",
+            question: "Air dan mineral yang diserap oleh akar diangkut menuju ke daun melalui bagian tumbuhan yaitu ....",
+            options: ["Batang", "Bunga", "Buah", "Biji"],
+            answer: 0,
+            hint: "Bagian ini menghubungkan akar di bawah dengan daun di bagian atas.",
+            explanation: "Batang memiliki pembuluh angkut yang menyalurkan air dan mineral dari akar menuju daun, serta mengedarkan hasil fotosintesis ke seluruh tubuh tumbuhan."
+          },
+          {
+            id: 4,
+            type: "mcq",
+            question: "Zat hijau daun yang berperan menangkap energi cahaya matahari saat proses fotosintesis disebut ....",
+            options: ["Stomata", "Oksigen", "Karbohidrat", "Klorofil"],
+            answer: 3,
+            hint: "Zat inilah yang membuat sebagian besar daun berwarna hijau.",
+            explanation: "Klorofil adalah zat hijau daun yang berfungsi menyerap energi cahaya matahari untuk menggerakkan proses fotosintesis."
+          },
+          {
+            id: 5,
+            type: "mcq",
+            question: "Mulut daun yang berfungsi sebagai tempat keluar masuknya gas pada tumbuhan disebut ....",
+            options: ["Kloroplas", "Lentisel", "Stomata", "Mahkota"],
+            answer: 2,
+            hint: "Letaknya berupa celah-celah mikroskopis di permukaan daun.",
+            explanation: "Stomata (mulut daun) adalah celah kecil pada daun sebagai tempat keluar masuknya gas karbon dioksida dan oksigen."
+          }
+        ]
       },
       {
-        topic: "Bagian Tubuh Tumbuhan",
-        question: "Tumbuhan berikut ini yang memiliki jenis akar serabut adalah ....",
-        options: ["Mangga dan jambu", "Padi dan jagung", "Durian dan rambutan", "Jeruk dan nangka"],
-        answer: 1,
-        explanation: "Padi dan jagung termasuk tumbuhan monokotil yang memiliki akar serabut, sedangkan mangga, jambu, durian, rambutan, jeruk, dan nangka berakar tunggang."
+        id: 1,
+        title: "Zona 2: Taman Cahaya Fotosintesis",
+        subtitle: "Pecahkan rahasia dapur makanan tumbuhan (5 Pilihan Ganda)",
+        icon: "☀️",
+        type: "mcq",
+        badgeId: "zone2",
+        questions: [
+          {
+            id: 6,
+            type: "mcq",
+            question: "Bahan-bahan yang dibutuhkan tumbuhan untuk melakukan proses fotosintesis adalah ....",
+            options: [
+              "Karbon dioksida, air, dan cahaya matahari",
+              "Oksigen, air, dan cahaya matahari",
+              "Karbohidrat, oksigen, dan air",
+              "Nitrogen, karbon dioksida, dan tanah"
+            ],
+            answer: 0,
+            hint: "Tumbuhan mengambil gas dari udara yang kita embuskan, air dari tanah, serta sinar matahari.",
+            explanation: "Bahan baku fotosintesis adalah karbon dioksida dari udara dan air dari tanah, dengan bantuan cahaya matahari dan klorofil."
+          },
+          {
+            id: 7,
+            type: "mcq",
+            question: "Gas yang dihasilkan oleh tumbuhan melalui proses fotosintesis dan sangat dibutuhkan manusia serta hewan untuk bernapas adalah ....",
+            options: ["Karbon dioksida", "Uap air", "Nitrogen", "Oksigen"],
+            answer: 3,
+            hint: "Kita menghirup gas ini setiap detik agar bisa tetap hidup.",
+            explanation: "Fotosintesis menghasilkan glukosa/karbohidrat sebagai makanan tumbuhan serta melepaskan gas oksigen untuk pernapasan manusia dan hewan."
+          },
+          {
+            id: 8,
+            type: "mcq",
+            question: "Berikut ini contoh tumbuhan yang menyimpan cadangan makanan hasil fotosintesisnya di dalam umbi akar adalah ....",
+            options: ["Tebu dan sagu", "Singkong dan wortel", "Mangga dan pepaya", "Bayam dan kangkung"],
+            answer: 1,
+            hint: "Bagian yang kita makan tumbuh membesar di dalam tanah sebagai akar.",
+            explanation: "Singkong dan wortel menyimpan cadangan makanan di dalam akar yang membesar (umbi akar). Tebu dan sagu menyimpannya di batang."
+          },
+          {
+            id: 9,
+            type: "mcq",
+            question: "Tumbuhan disebut sebagai makhluk hidup autotrof atau produsen utama di Bumi karena ....",
+            options: [
+              "Dapat bergerak bebas mencari makanan sendiri",
+              "Memakan tumbuhan lain untuk bertahan hidup",
+              "Dapat membuat makanannya sendiri melalui fotosintesis",
+              "Hanya dapat tumbuh di daerah yang banyak air"
+            ],
+            answer: 2,
+            hint: "Makhluk hidup lain bergantung pada hasil olahan tumbuhan sebagai sumber energi.",
+            explanation: "Tumbuhan disebut produsen karena mampu membuat makanannya sendiri melalui fotosintesis dan menjadi sumber energi bagi makhluk hidup lain."
+          },
+          {
+            id: 10,
+            type: "mcq",
+            question: "Bagian bunga yang berfungsi sebagai alat kelamin jantan pada tumbuhan adalah ....",
+            options: ["Putik", "Mahkota bunga", "Kelopak bunga", "Benang sari"],
+            answer: 3,
+            hint: "Bagian ini menghasilkan serbuk sari yang mudah terbawa angin atau menempel pada serangga.",
+            explanation: "Benang sari menghasilkan serbuk sari sehingga berperan sebagai alat kelamin jantan, sedangkan putik adalah alat kelamin betina."
+          }
+        ]
       },
       {
-        topic: "Bagian Tubuh Tumbuhan",
-        question: "Air dan mineral yang diserap oleh akar diangkut menuju ke daun melalui bagian tumbuhan yaitu ....",
-        options: ["Batang", "Bunga", "Buah", "Biji"],
-        answer: 0,
-        explanation: "Batang memiliki pembuluh angkut yang menyalurkan air dan mineral dari akar menuju daun, serta mengedarkan hasil fotosintesis ke seluruh tubuh tumbuhan."
+        id: 2,
+        title: "Zona 3: Kebun Bunga & Penyebaran Biji",
+        subtitle: "Bantu tumbuhan berkembang biak dan lestari (5 Pilihan Ganda)",
+        icon: "🌺",
+        type: "mcq",
+        badgeId: "zone3",
+        questions: [
+          {
+            id: 11,
+            type: "mcq",
+            question: "Peristiwa jatuhnya serbuk sari ke kepala putik disebut ....",
+            options: ["Penyerbukan", "Pembuahan", "Fotosintesis", "Perkecambahan"],
+            answer: 0,
+            hint: "Tahap awal sebelum terjadinya pembuahan di dalam bakal biji.",
+            explanation: "Penyerbukan adalah peristiwa jatuhnya serbuk sari ke kepala putik sebagai awal perkembangbiakan generatif."
+          },
+          {
+            id: 12,
+            type: "mcq",
+            question: "Warna mahkota bunga yang cerah dan keberadaan nektar pada beberapa tumbuhan bertujuan untuk ....",
+            options: [
+              "Menakuti pemangsa tumbuhan",
+              "Menarik serangga agar membantu penyerbukan",
+              "Mempercepat penguapan air dari daun",
+              "Melindungi akar dari kekeringan"
+            ],
+            answer: 1,
+            hint: "Lebah dan kupu-kupu suka datang karena warna indah dan cairan manis ini.",
+            explanation: "Mahkota bunga yang cerah dan nektar yang manis menarik serangga seperti lebah dan kupu-kupu untuk membantu proses penyerbukan."
+          },
+          {
+            id: 13,
+            type: "mcq",
+            question: "Tumbuhan kelapa memiliki buah yang berserabut dan mampu mengapung. Cara penyebaran biji tumbuhan kelapa umumnya dibantu oleh ....",
+            options: ["Angin", "Hewan", "Air", "Gravitasi"],
+            answer: 2,
+            hint: "Pohon kelapa banyak tumbuh di pantai dan tepi sungai.",
+            explanation: "Sabut kelapa berongga sehingga ringan dan mengapung di air, memungkinkan buah kelapa terbawa arus air ke tempat baru."
+          },
+          {
+            id: 14,
+            type: "mcq",
+            question: "Tumbuhan berikut yang berkembang biak secara vegetatif alami menggunakan tunas adalah ....",
+            options: ["Pisang dan bambu", "Mangga dan rambutan", "Jagung dan kacang tanah", "Semangka dan melon"],
+            answer: 0,
+            hint: "Anakannya sering tumbuh berkelompok tepat di samping batang induknya.",
+            explanation: "Pisang dan bambu berkembang biak secara vegetatif alami dengan tunas yang tumbuh di sekitar induknya."
+          },
+          {
+            id: 15,
+            type: "mcq",
+            question: "Pak Budi ingin memperbanyak tanaman mangga miliknya agar cepat berbuah dan memiliki sifat sama persis dengan induknya. Ia mengupas kulit batang, lalu membungkusnya dengan tanah dan sabut kelapa hingga tumbuh akar. Cara yang dilakukan Pak Budi disebut ....",
+            options: ["Stek", "Okulasi", "Merunduk", "Mencangkok"],
+            answer: 3,
+            hint: "Teknik ini dilakukan langsung pada cabang pohon berkayu dengan membungkus media tanam.",
+            explanation: "Mencangkok dilakukan dengan mengupas kulit cabang batang berkayu dan membungkusnya dengan media tanam hingga berakar."
+          }
+        ]
       },
       {
-        topic: "Fotosintesis",
-        question: "Zat hijau daun yang berperan menangkap energi cahaya matahari saat proses fotosintesis disebut ....",
-        options: ["Stomata", "Oksigen", "Karbohidrat", "Klorofil"],
-        answer: 3,
-        explanation: "Klorofil adalah zat hijau daun yang berfungsi menyerap energi cahaya matahari untuk menggerakkan proses fotosintesis."
-      },
-      {
-        topic: "Fotosintesis",
-        question: "Mulut daun yang berfungsi sebagai tempat keluar masuknya gas pada tumbuhan disebut ....",
-        options: ["Kloroplas", "Lentisel", "Stomata", "Mahkota"],
-        answer: 2,
-        explanation: "Stomata (mulut daun) merupakan celah kecil pada daun sebagai tempat keluar masuknya gas karbon dioksida dan oksigen."
-      },
-      {
-        topic: "Fotosintesis",
-        question: "Bahan-bahan yang dibutuhkan tumbuhan untuk melakukan proses fotosintesis adalah ....",
-        options: [
-          "Karbon dioksida, air, dan cahaya matahari",
-          "Oksigen, air, dan cahaya matahari",
-          "Karbohidrat, oksigen, dan air",
-          "Nitrogen, karbon dioksida, dan tanah"
-        ],
-        answer: 0,
-        explanation: "Bahan baku fotosintesis adalah karbon dioksida dari udara dan air dari tanah, dengan bantuan cahaya matahari dan klorofil."
-      },
-      {
-        topic: "Fotosintesis",
-        question: "Gas yang dihasilkan oleh tumbuhan melalui proses fotosintesis dan sangat dibutuhkan manusia serta hewan untuk bernapas adalah ....",
-        options: ["Karbon dioksida", "Uap air", "Nitrogen", "Oksigen"],
-        answer: 3,
-        explanation: "Fotosintesis menghasilkan glukosa/karbohidrat sebagai makanan tumbuhan serta melepaskan gas oksigen untuk pernapasan manusia dan hewan."
-      },
-      {
-        topic: "Fotosintesis",
-        question: "Berikut ini contoh tumbuhan yang menyimpan cadangan makanan hasil fotosintesisnya di dalam umbi akar adalah ....",
-        options: ["Tebu dan sagu", "Singkong dan wortel", "Mangga dan pepaya", "Bayam dan kangkung"],
-        answer: 1,
-        explanation: "Singkong dan wortel menyimpan cadangan makanan di dalam akar yang membesar (umbi akar). Tebu dan sagu menyimpannya di batang."
-      },
-      {
-        topic: "Fotosintesis",
-        question: "Tumbuhan disebut sebagai makhluk hidup autotrof atau produsen utama di Bumi karena ....",
-        options: [
-          "Dapat bergerak bebas mencari makanan sendiri",
-          "Memakan tumbuhan lain untuk bertahan hidup",
-          "Dapat membuat makanannya sendiri melalui fotosintesis",
-          "Hanya dapat tumbuh di daerah yang banyak air"
-        ],
-        answer: 2,
-        explanation: "Tumbuhan disebut produsen karena mampu membuat makanannya sendiri melalui fotosintesis dan menjadi sumber energi bagi makhluk hidup lain."
-      },
-      {
-        topic: "Perkembangbiakan Tumbuhan",
-        question: "Bagian bunga yang berfungsi sebagai alat kelamin jantan pada tumbuhan adalah ....",
-        options: ["Putik", "Mahkota bunga", "Kelopak bunga", "Benang sari"],
-        answer: 3,
-        explanation: "Benang sari menghasilkan serbuk sari sehingga berperan sebagai alat kelamin jantan, sedangkan putik adalah alat kelamin betina."
-      },
-      {
-        topic: "Perkembangbiakan Tumbuhan",
-        question: "Peristiwa jatuhnya serbuk sari ke kepala putik disebut ....",
-        options: ["Penyerbukan", "Pembuahan", "Fotosintesis", "Perkecambahan"],
-        answer: 0,
-        explanation: "Penyerbukan adalah peristiwa jatuhnya serbuk sari ke kepala putik sebagai awal perkembangbiakan generatif."
-      },
-      {
-        topic: "Perkembangbiakan Tumbuhan",
-        question: "Warna mahkota bunga yang cerah dan keberadaan nektar pada beberapa tumbuhan bertujuan untuk ....",
-        options: [
-          "Menakuti pemangsa tumbuhan",
-          "Menarik serangga agar membantu penyerbukan",
-          "Mempercepat penguapan air dari daun",
-          "Melindungi akar dari kekeringan"
-        ],
-        answer: 1,
-        explanation: "Mahkota bunga yang cerah dan nektar yang manis menarik serangga seperti lebah dan kupu-kupu untuk membantu proses penyerbukan."
-      },
-      {
-        topic: "Perkembangbiakan Tumbuhan",
-        question: "Tumbuhan kelapa memiliki buah yang berserabut dan mampu mengapung. Cara penyebaran biji tumbuhan kelapa umumnya dibantu oleh ....",
-        options: ["Angin", "Hewan", "Air", "Gravitasi"],
-        answer: 2,
-        explanation: "Sabut kelapa berongga sehingga ringan dan mengapung di air, memungkinkan buah kelapa terbawa arus air ke tempat baru."
-      },
-      {
-        topic: "Perkembangbiakan Tumbuhan",
-        question: "Tumbuhan berikut yang berkembang biak secara vegetatif alami menggunakan tunas adalah ....",
-        options: ["Pisang dan bambu", "Mangga dan rambutan", "Jagung dan kacang tanah", "Semangka dan melon"],
-        answer: 0,
-        explanation: "Pisang dan bambu berkembang biak secara vegetatif alami dengan tunas yang tumbuh di sekitar induknya."
-      },
-      {
-        topic: "Perkembangbiakan Tumbuhan",
-        question: "Pak Budi ingin memperbanyak tanaman mangga miliknya agar cepat berbuah dan memiliki sifat sama persis dengan induknya. Ia mengupas kulit batang, lalu membungkusnya dengan tanah dan sabut kelapa hingga tumbuh akar. Cara yang dilakukan Pak Budi disebut ....",
-        options: ["Stek", "Okulasi", "Merunduk", "Mencangkok"],
-        answer: 3,
-        explanation: "Mencangkok dilakukan dengan mengupas kulit cabang batang berkayu dan membungkusnya dengan media tanam hingga berakar."
+        id: 3,
+        title: "Zona 4 (Boss): Benteng Penjaga Bumi",
+        subtitle: "Uji ketajaman ingatan dengan 5 Tantangan Isian Singkat!",
+        icon: "🛡️",
+        type: "fill",
+        badgeId: null,
+        questions: [
+          {
+            id: 16,
+            type: "fill",
+            question: "Bagian bunga yang berperan melindungi bunga saat masih kuncup adalah ....",
+            accepted: ["kelopak", "kelopak bunga"],
+            displayAnswer: "Kelopak bunga",
+            hint: "Biasanya berwarna hijau dan berada di bagian paling luar/bawah mahkota bunga.",
+            explanation: "Kelopak bunga terletak di bagian luar bunga dan melindungi mahkota serta bagian dalam bunga saat masih kuncup."
+          },
+          {
+            id: 17,
+            type: "fill",
+            question: "Hasil fotosintesis berupa karbohidrat yang tidak langsung digunakan akan disimpan tumbuhan sebagai ....",
+            accepted: ["cadangan makanan", "karbohidrat", "pati", "zat tepung"],
+            displayAnswer: "Cadangan makanan",
+            hint: "Disimpan di umbi, buah, biji, atau batang untuk digunakan nanti (2 kata, dimulai dengan 'cadangan ...').",
+            explanation: "Kelebihan hasil fotosintesis disimpan tumbuhan di umbi, buah, biji, atau batang sebagai cadangan makanan."
+          },
+          {
+            id: 18,
+            type: "fill",
+            question: "Pada proses fotosintesis, tumbuhan menyerap gas .... dari udara melalui stomata.",
+            accepted: ["karbon dioksida", "karbondioksida", "co2"],
+            displayAnswer: "Karbon dioksida",
+            hint: "Gas yang dikeluarkan manusia dan hewan saat mengembuskan napas (CO2).",
+            explanation: "Gas karbon dioksida masuk melalui stomata untuk diolah bersama air menjadi glukosa saat fotosintesis."
+          },
+          {
+            id: 19,
+            type: "fill",
+            question: "Alat kelamin betina pada bunga yang berperan menerima serbuk sari saat penyerbukan adalah ....",
+            accepted: ["putik", "kepala putik"],
+            displayAnswer: "Putik",
+            hint: "Berada di bagian tengah bunga (1 kata, diawali huruf P).",
+            explanation: "Putik berada di bagian tengah bunga dan memiliki kepala putik untuk menangkap serbuk sari."
+          },
+          {
+            id: 20,
+            type: "fill",
+            question: "Penyebaran biji tumbuhan kapuk atau dandelion yang ringan dan berambut halus dibantu oleh ....",
+            accepted: ["angin", "hembusan angin"],
+            displayAnswer: "Angin",
+            hint: "Biji yang sangat ringan mudah terbang terbawa udara yang bergerak.",
+            explanation: "Biji yang ringan dan memiliki serabut/rambut halus mudah terbawa hembusan angin hingga jauh dari induknya."
+          }
+        ]
       }
     ];
 
+    const BADGES = [
+      { id: "zone1", icon: "🌿", name: "Ahli Akar & Batang" },
+      { id: "zone2", icon: "☀️", name: "Master Fotosintesis" },
+      { id: "zone3", icon: "🐝", name: "Sahabat Penyerbuk" },
+      { id: "combo3", icon: "🔥", name: "Kombo Petir 3x" },
+      { id: "perfect", icon: "👑", name: "Penjaga Bumi" }
+    ];
+
     const LETTERS = ["A", "B", "C", "D"];
-    let currentIndex = 0;
-    let userAnswers = new Array(QUESTIONS.length).fill(null);
+    const LB_STORAGE_KEY = "ipas_kelas4_gamifikasi_leaderboard_v1";
 
-    const startScreen = document.getElementById("start-screen");
-    const quizScreen = document.getElementById("quiz-screen");
-    const resultScreen = document.getElementById("result-screen");
+    // Application State
+    let state = {
+      playerName: "",
+      playerClass: "",
+      avatar: AVATARS[0],
+      xp: 0,
+      hearts: 5,
+      maxHearts: 5,
+      streak: 0,
+      maxStreak: 0,
+      powerups: { fifty: 2, hint: 2, heal: 1 },
+      badges: new Set(),
+      completedZones: new Set(),
+      answersLog: {}, // questionId -> { question, userAnswerText, correctAnswerText, isCorrect, explanation }
+      soundEnabled: true,
+      activeZoneId: 0,
+      activeQuestionIdx: 0,
+      questionStartTime: 0,
+      answeredCurrent: false,
+      lastScreenBeforeLb: "welcome"
+    };
 
-    const studentNameInput = document.getElementById("student-name");
-    const studentClassInput = document.getElementById("student-class");
-    const startError = document.getElementById("start-error");
+    // Web Audio Synthesizer (zero external audio files)
+    let audioCtx = null;
+    function playTone(type) {
+      if (!state.soundEnabled) return;
+      try {
+        if (!audioCtx) {
+          const Ctx = window.AudioContext || window.webkitAudioContext;
+          if (!Ctx) return;
+          audioCtx = new Ctx();
+        }
+        const now = audioCtx.currentTime;
+        const notes =
+          type === "correct"
+            ? [523.25, 659.25, 783.99]
+            : type === "wrong"
+            ? [311.13, 246.94]
+            : type === "badge"
+            ? [523.25, 659.25, 783.99, 1046.5]
+            : [440, 554.37];
 
-    const metaStudent = document.getElementById("meta-student");
-    const metaCounter = document.getElementById("meta-counter");
-    const progressFill = document.getElementById("progress-fill");
-    const qTopic = document.getElementById("q-topic");
-    const qText = document.getElementById("q-text");
-    const optionsContainer = document.getElementById("options-container");
-    const quizWarning = document.getElementById("quiz-warning");
-    const dotsNav = document.getElementById("dots-nav");
-
-    const btnPrev = document.getElementById("btn-prev");
-    const btnNext = document.getElementById("btn-next");
-    const btnSubmit = document.getElementById("btn-submit");
-
-    function renderQuestion() {
-      const q = QUESTIONS[currentIndex];
-      metaCounter.textContent = `Soal ${currentIndex + 1} dari ${QUESTIONS.length}`;
-
-      const answeredCount = userAnswers.filter((a) => a !== null).length;
-      progressFill.style.width = `${(answeredCount / QUESTIONS.length) * 100}%`;
-
-      qTopic.textContent = q.topic;
-      qText.textContent = `${currentIndex + 1}. ${q.question}`;
-      quizWarning.classList.add("hidden");
-
-      optionsContainer.innerHTML = "";
-      q.options.forEach((optText, idx) => {
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "option-btn" + (userAnswers[currentIndex] === idx ? " selected" : "");
-
-        const letterSpan = document.createElement("span");
-        letterSpan.className = "option-letter";
-        letterSpan.textContent = LETTERS[idx];
-
-        const textSpan = document.createElement("span");
-        textSpan.textContent = optText;
-
-        btn.appendChild(letterSpan);
-        btn.appendChild(textSpan);
-        btn.addEventListener("click", () => {
-          userAnswers[currentIndex] = idx;
-          renderQuestion();
+        notes.forEach((freq, idx) => {
+          const osc = audioCtx.createOscillator();
+          const gain = audioCtx.createGain();
+          osc.type = type === "wrong" ? "triangle" : "sine";
+          osc.frequency.setValueAtTime(freq, now + idx * 0.08);
+          gain.gain.setValueAtTime(0.08, now + idx * 0.08);
+          gain.gain.exponentialRampToValueAtTime(0.001, now + idx * 0.08 + 0.18);
+          osc.connect(gain);
+          gain.connect(audioCtx.destination);
+          osc.start(now + idx * 0.08);
+          osc.stop(now + idx * 0.08 + 0.2);
         });
-
-        optionsContainer.appendChild(btn);
-      });
-
-      btnPrev.disabled = currentIndex === 0;
-      const isLast = currentIndex === QUESTIONS.length - 1;
-      btnNext.classList.toggle("hidden", isLast);
-      btnSubmit.classList.toggle("hidden", !isLast);
-
-      renderDots();
+      } catch (_) {
+        // Ignore audio errors on restricted devices
+      }
     }
 
-    function renderDots() {
-      dotsNav.innerHTML = "";
-      QUESTIONS.forEach((_, idx) => {
-        const dot = document.createElement("button");
-        dot.type = "button";
-        dot.className = "dot-btn";
-        if (userAnswers[idx] !== null) dot.classList.add("answered");
-        if (idx === currentIndex) dot.classList.add("current");
-        dot.textContent = String(idx + 1);
-        dot.addEventListener("click", () => {
-          currentIndex = idx;
-          renderQuestion();
-        });
-        dotsNav.appendChild(dot);
+    function totalQuestionsCount() {
+      return ZONES.reduce((sum, z) => sum + z.questions.length, 0);
+    }
+
+    function answeredQuestionsCount() {
+      return Object.keys(state.answersLog).length;
+    }
+
+    function correctAnswersCount() {
+      return Object.values(state.answersLog).filter((entry) => entry.isCorrect).length;
+    }
+
+    function renderPlantSvg(ratio) {
+      if (ratio < 0.25) {
+        return {
+          stageName: "Tahap 1: Biji Kehidupan",
+          svg: `<svg viewBox="0 0 64 64" width="58" height="58"><ellipse cx="32" cy="52" rx="22" ry="6" fill="#a16207" opacity="0.25"/><path d="M32 22c-8 6-11 16-6 23 3 4 9 4 12 0 5-7 2-17-6-23z" fill="#854d0e"/><path d="M32 23c1-5 5-9 10-10-1 6-4 9-10 10z" fill="#22c55e"/></svg>`
+        };
+      }
+      if (ratio < 0.5) {
+        return {
+          stageName: "Tahap 2: Kecambah Tunas",
+          svg: `<svg viewBox="0 0 64 64" width="58" height="58"><ellipse cx="32" cy="54" rx="22" ry="5" fill="#a16207" opacity="0.25"/><path d="M32 54V28" stroke="#16a34a" stroke-width="4" stroke-linecap="round"/><path d="M32 34c-12-2-18-10-16-16 8 0 15 6 16 16z" fill="#22c55e"/><path d="M32 30c12-2 18-10 16-16-8 0-15 6-16 16z" fill="#4ade80"/></svg>`
+        };
+      }
+      if (ratio < 0.75) {
+        return {
+          stageName: "Tahap 3: Pohon Muda Rindang",
+          svg: `<svg viewBox="0 0 64 64" width="58" height="58"><ellipse cx="32" cy="56" rx="22" ry="5" fill="#a16207" opacity="0.25"/><rect x="29" y="34" width="6" height="22" rx="2" fill="#854d0e"/><circle cx="32" cy="24" r="14" fill="#16a34a"/><circle cx="22" cy="28" r="9" fill="#22c55e"/><circle cx="42" cy="28" r="9" fill="#22c55e"/></svg>`
+        };
+      }
+      if (ratio < 1) {
+        return {
+          stageName: "Tahap 4: Pohon Berbunga",
+          svg: `<svg viewBox="0 0 64 64" width="58" height="58"><ellipse cx="32" cy="56" rx="22" ry="5" fill="#a16207" opacity="0.25"/><rect x="28" y="34" width="8" height="22" rx="2" fill="#854d0e"/><circle cx="32" cy="22" r="16" fill="#15803d"/><circle cx="21" cy="27" r="10" fill="#22c55e"/><circle cx="43" cy="27" r="10" fill="#22c55e"/><circle cx="25" cy="18" r="3.5" fill="#fde047"/><circle cx="39" cy="20" r="3.5" fill="#f9a8d4"/><circle cx="32" cy="29" r="3.5" fill="#fde047"/></svg>`
+        };
+      }
+      return {
+        stageName: "Tahap 5: Pohon Kehidupan Berbuah!",
+        svg: `<svg viewBox="0 0 64 64" width="58" height="58"><ellipse cx="32" cy="56" rx="23" ry="5" fill="#a16207" opacity="0.25"/><rect x="28" y="34" width="8" height="22" rx="2" fill="#78350f"/><circle cx="32" cy="21" r="17" fill="#15803d"/><circle cx="20" cy="26" r="10" fill="#16a34a"/><circle cx="44" cy="26" r="10" fill="#16a34a"/><circle cx="24" cy="18" r="3.5" fill="#ef4444"/><circle cx="39" cy="16" r="3.5" fill="#f59e0b"/><circle cx="34" cy="27" r="3.5" fill="#ef4444"/><circle cx="21" cy="29" r="3" fill="#f59e0b"/><path d="M51 11l1.5 3.5L56 16l-3.5 1.5L51 21l-1.5-3.5L46 16l3.5-1.5z" fill="#facc15"/></svg>`
+      };
+    }
+
+    function showScreen(screenId) {
+      ["screen-welcome", "screen-map", "screen-play", "screen-result", "screen-leaderboard"].forEach((id) => {
+        document.getElementById(id).classList.toggle("hidden", id !== screenId);
       });
     }
 
-    function showResults() {
-      const unanswered = userAnswers
-        .map((val, idx) => (val === null ? idx + 1 : null))
-        .filter((v) => v !== null);
+    function renderAvatars() {
+      const grid = document.getElementById("avatar-grid");
+      grid.innerHTML = "";
+      AVATARS.forEach((av) => {
+        const card = document.createElement("button");
+        card.type = "button";
+        card.className = "avatar-card" + (state.avatar.id === av.id ? " selected" : "");
+        card.innerHTML = `<span class="avatar-emoji">${av.emoji}</span><span class="avatar-name">${av.name}</span><span class="avatar-role">${av.role}</span>`;
+        card.addEventListener("click", () => {
+          state.avatar = av;
+          renderAvatars();
+        });
+        grid.appendChild(card);
+      });
+    }
 
-      if (unanswered.length > 0) {
-        quizWarning.textContent = `Masih ada soal yang belum dijawab: nomor ${unanswered.join(", ")}.`;
-        quizWarning.classList.remove("hidden");
-        return;
+    function formatHearts(hearts, maxHearts) {
+      return "❤️".repeat(Math.max(0, hearts)) + "🤍".repeat(Math.max(0, maxHearts - hearts));
+    }
+
+    function updateHud() {
+      const totalQ = totalQuestionsCount();
+      const doneQ = answeredQuestionsCount();
+      const ratio = totalQ > 0 ? doneQ / totalQ : 0;
+      const plant = renderPlantSvg(ratio);
+
+      document.getElementById("plant-svg-container").innerHTML = plant.svg;
+      const labelClass = state.playerClass ? ` (${state.playerClass})` : "";
+      document.getElementById("hud-player").textContent = `${state.avatar.emoji} ${state.playerName}${labelClass}`;
+      document.getElementById("hud-plant-stage").textContent = plant.stageName;
+      document.getElementById("hud-plant-progress").textContent = `Progres tumbuh: ${doneQ}/${totalQ} tantangan`;
+
+      document.getElementById("hud-xp").textContent = String(state.xp);
+      document.getElementById("hud-hearts").textContent = formatHearts(state.hearts, state.maxHearts);
+      document.getElementById("hud-streak").textContent = `${state.streak}x 🔥`;
+      document.getElementById("hud-badges-count").textContent = `${state.badges.size} / ${BADGES.length}`;
+
+      const badgesContainer = document.getElementById("badges-container");
+      badgesContainer.innerHTML = "";
+      BADGES.forEach((b) => {
+        const chip = document.createElement("span");
+        chip.className = "badge-chip" + (state.badges.has(b.id) ? " earned" : "");
+        chip.textContent = `${b.icon} ${b.name}`;
+        badgesContainer.appendChild(chip);
+      });
+    }
+
+    function renderZonesMap() {
+      updateHud();
+      const grid = document.getElementById("zones-grid");
+      grid.innerHTML = "";
+
+      ZONES.forEach((zone, idx) => {
+        const isCompleted = state.completedZones.has(zone.id);
+        const isUnlocked = idx === 0 || state.completedZones.has(idx - 1) || isCompleted;
+
+        const card = document.createElement("div");
+        card.className = "zone-card " + (isCompleted ? "completed" : isUnlocked ? "unlocked" : "locked");
+
+        const statusText = isCompleted ? "Selesai" : isUnlocked ? "Siap Dimainkan" : "Terkunci";
+        const zoneDone = zone.questions.filter((q) => state.answersLog[q.id]).length;
+
+        card.innerHTML = `
+          <div>
+            <div class="zone-header">
+              <div style="font-size: 1.8rem;">${zone.icon}</div>
+              <span class="zone-badge">${statusText}</span>
+            </div>
+            <h3 style="margin: 8px 0 4px; font-size: 1.05rem;">${zone.title}</h3>
+            <p style="margin: 0; font-size: 0.88rem; color: var(--muted);">${zone.subtitle}</p>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px;">
+            <span style="font-size: 0.82rem; font-weight: 700; color: var(--muted);">Progres: ${zoneDone}/${zone.questions.length}</span>
+            <button class="btn ${isCompleted ? "btn-soft" : "btn-primary"}" type="button" ${isUnlocked ? "" : "disabled"}>
+              ${isCompleted ? "Main Ulang" : isUnlocked ? "Masuk Zona" : "🔒 Terkunci"}
+            </button>
+          </div>
+        `;
+
+        const btn = card.querySelector("button");
+        if (isUnlocked) {
+          btn.addEventListener("click", () => startZone(zone.id));
+        }
+        grid.appendChild(card);
+      });
+
+      const allComplete = state.completedZones.size === ZONES.length;
+      document.getElementById("btn-finish-early").classList.toggle("hidden", !allComplete);
+      state.lastScreenBeforeLb = "map";
+      showScreen("screen-map");
+    }
+
+    function startZone(zoneId) {
+      state.activeZoneId = zoneId;
+      state.activeQuestionIdx = 0;
+      if (state.hearts <= 0) {
+        state.hearts = 3; // Refill energy upon entering a zone
+      }
+      state.lastScreenBeforeLb = "play";
+      showScreen("screen-play");
+      renderPlayQuestion();
+    }
+
+    function updatePowerupButtons(question) {
+      const puFifty = document.getElementById("pu-fifty");
+      const puHint = document.getElementById("pu-hint");
+      const puHeal = document.getElementById("pu-heal");
+
+      document.getElementById("pu-fifty-count").textContent = String(state.powerups.fifty);
+      document.getElementById("pu-hint-count").textContent = String(state.powerups.hint);
+      document.getElementById("pu-heal-count").textContent = String(state.powerups.heal);
+
+      puFifty.disabled = state.answeredCurrent || state.powerups.fifty <= 0 || question.type !== "mcq";
+      puHint.disabled = state.answeredCurrent || state.powerups.hint <= 0;
+      puHeal.disabled = state.powerups.heal <= 0 || state.hearts >= state.maxHearts;
+    }
+
+    function renderPlayQuestion() {
+      const zone = ZONES[state.activeZoneId];
+      const q = zone.questions[state.activeQuestionIdx];
+      state.answeredCurrent = false;
+      state.questionStartTime = Date.now();
+
+      document.getElementById("play-zone-badge").textContent = `${zone.icon} ${zone.title}`;
+      document.getElementById("play-counter").textContent = `Tantangan ${state.activeQuestionIdx + 1} dari ${zone.questions.length}`;
+      document.getElementById("play-hearts").textContent = formatHearts(state.hearts, state.maxHearts);
+      document.getElementById("play-xp").textContent = `${state.xp} XP`;
+      document.getElementById("play-streak").textContent = `${state.streak}x 🔥`;
+      document.getElementById("play-progress").style.width = `${(state.activeQuestionIdx / zone.questions.length) * 100}%`;
+
+      document.getElementById("play-hint-box").classList.add("hidden");
+      document.getElementById("play-feedback").classList.add("hidden");
+      document.getElementById("play-question").textContent = `${q.id}. ${q.question}`;
+
+      const optionsWrap = document.getElementById("play-options");
+      const fillArea = document.getElementById("play-fill-area");
+      optionsWrap.innerHTML = "";
+
+      if (q.type === "mcq") {
+        optionsWrap.classList.remove("hidden");
+        fillArea.classList.add("hidden");
+        q.options.forEach((optText, idx) => {
+          const btn = document.createElement("button");
+          btn.type = "button";
+          btn.className = "option-btn";
+          btn.dataset.index = String(idx);
+          btn.innerHTML = `<span class="option-letter">${LETTERS[idx]}</span><span>${optText}</span>`;
+          btn.addEventListener("click", () => handleMcqAnswer(idx));
+          optionsWrap.appendChild(btn);
+        });
+      } else {
+        optionsWrap.classList.add("hidden");
+        fillArea.classList.remove("hidden");
+        const input = document.getElementById("play-fill-input");
+        input.value = "";
+        input.disabled = false;
+        document.getElementById("btn-submit-fill").disabled = false;
+        document.getElementById("play-fill-error").classList.add("hidden");
+        input.focus();
       }
 
-      let correctCount = 0;
-      const reviewList = document.getElementById("review-list");
+      updatePowerupButtons(q);
+    }
+
+    function normalizeText(str) {
+      return str.trim().toLowerCase().replace(/\s+/g, " ");
+    }
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#39;");
+    }
+
+    function applyAnswerResult(isCorrect, userAnswerText, correctAnswerText, question) {
+      state.answeredCurrent = true;
+      const elapsedSec = (Date.now() - state.questionStartTime) / 1000;
+
+      let gainedXp = 0;
+      let extraMsg = "";
+
+      if (isCorrect) {
+        state.streak += 1;
+        if (state.streak > state.maxStreak) state.maxStreak = state.streak;
+
+        const baseXp = question.type === "fill" ? 30 : 20;
+        const speedBonus = elapsedSec <= 12 ? 5 : 0;
+        const streakBonus = Math.min((state.streak - 1) * 5, 20);
+        gainedXp = baseXp + speedBonus + streakBonus;
+        state.xp += gainedXp;
+
+        if (state.streak >= 3 && !state.badges.has("combo3")) {
+          state.badges.add("combo3");
+          extraMsg = " | Lencana Baru: 🔥 Kombo Petir 3x!";
+          playTone("badge");
+        } else {
+          playTone("correct");
+        }
+
+        if (state.streak % 3 === 0) {
+          state.powerups.heal += 1;
+          extraMsg += " | Bonus +1 Air Segar!";
+        }
+      } else {
+        state.streak = 0;
+        state.hearts = Math.max(0, state.hearts - 1);
+        playTone("wrong");
+      }
+
+      state.answersLog[question.id] = {
+        id: question.id,
+        question: question.question,
+        userAnswerText,
+        correctAnswerText,
+        isCorrect,
+        explanation: question.explanation
+      };
+
+      document.getElementById("play-hearts").textContent = formatHearts(state.hearts, state.maxHearts);
+      document.getElementById("play-xp").textContent = `${state.xp} XP`;
+      document.getElementById("play-streak").textContent = `${state.streak}x 🔥`;
+      updatePowerupButtons(question);
+
+      const feedback = document.getElementById("play-feedback");
+      feedback.className = "feedback-panel " + (isCorrect ? "correct" : "wrong");
+      document.getElementById("feedback-title").textContent = isCorrect
+        ? "🎉 Tepat Sekali!"
+        : `💡 Hampir Benar! Jawaban yang tepat: ${correctAnswerText}`;
+      document.getElementById("feedback-text").textContent = question.explanation;
+      document.getElementById("feedback-xp").textContent = isCorrect
+        ? `+${gainedXp} XP${extraMsg}`
+        : state.hearts === 0
+        ? "Nyawa habis! Tetap semangat, nyawa akan dipulihkan di akhir tantangan ini."
+        : "-1 Nyawa (Streak kembali ke 0)";
+      feedback.classList.remove("hidden");
+
+      const zone = ZONES[state.activeZoneId];
+      const nextBtn = document.getElementById("btn-next-question");
+      nextBtn.textContent =
+        state.activeQuestionIdx === zone.questions.length - 1 ? "Selesaikan Zona 🏁" : "Lanjut Misi ➡️";
+    }
+
+    function handleMcqAnswer(chosenIdx) {
+      if (state.answeredCurrent) return;
+      const zone = ZONES[state.activeZoneId];
+      const q = zone.questions[state.activeQuestionIdx];
+      const isCorrect = chosenIdx === q.answer;
+
+      const btns = document.querySelectorAll("#play-options .option-btn");
+      btns.forEach((b) => {
+        const idx = Number(b.dataset.index);
+        b.disabled = true;
+        if (idx === q.answer) b.classList.add("is-correct");
+        if (idx === chosenIdx && !isCorrect) b.classList.add("is-wrong");
+      });
+
+      applyAnswerResult(
+        isCorrect,
+        `${LETTERS[chosenIdx]}. ${q.options[chosenIdx]}`,
+        `${LETTERS[q.answer]}. ${q.options[q.answer]}`,
+        q
+      );
+    }
+
+    function handleFillAnswer() {
+      if (state.answeredCurrent) return;
+      const input = document.getElementById("play-fill-input");
+      const raw = input.value;
+      if (!raw.trim()) {
+        document.getElementById("play-fill-error").classList.remove("hidden");
+        return;
+      }
+      document.getElementById("play-fill-error").classList.add("hidden");
+      input.disabled = true;
+      document.getElementById("btn-submit-fill").disabled = true;
+
+      const zone = ZONES[state.activeZoneId];
+      const q = zone.questions[state.activeQuestionIdx];
+      const norm = normalizeText(raw);
+      const isCorrect = q.accepted.some((ans) => norm === normalizeText(ans));
+
+      applyAnswerResult(isCorrect, raw.trim(), q.displayAnswer, q);
+    }
+
+    function saveToLeaderboard(scorePct) {
+      try {
+        const raw = localStorage.getItem(LB_STORAGE_KEY);
+        const list = raw ? JSON.parse(raw) : [];
+        list.push({
+          name: state.playerName,
+          cls: state.playerClass || "-",
+          avatar: state.avatar.emoji,
+          score: scorePct,
+          xp: state.xp,
+          date: new Date().toLocaleDateString("id-ID")
+        });
+        list.sort((a, b) => b.xp - a.xp || b.score - a.score);
+        localStorage.setItem(LB_STORAGE_KEY, JSON.stringify(list.slice(0, 15)));
+      } catch (_) {
+        // Ignore storage errors
+      }
+    }
+
+    function finishAllAndShowCertificate() {
+      const totalQ = totalQuestionsCount();
+      const correctQ = correctAnswersCount();
+      const scorePct = Math.round((correctQ / totalQ) * 100);
+
+      if (scorePct >= 90) {
+        state.badges.add("perfect");
+      }
+      saveToLeaderboard(scorePct);
+      playTone("badge");
+
+      const labelClass = state.playerClass ? ` — Kelas ${state.playerClass}` : "";
+      document.getElementById("cert-name").textContent = `${state.avatar.emoji} ${state.playerName}${labelClass}`;
+      document.getElementById("cert-title").textContent = `Gelar: ${state.avatar.name} (${state.avatar.role})`;
+      document.getElementById("cert-score").textContent = `${scorePct}`;
+      document.getElementById("cert-stats").textContent = `Benar ${correctQ} dari ${totalQ} tantangan • Total ${state.xp} XP • Streak Terbaik ${state.maxStreak}x`;
+
+      const certBadges = document.getElementById("cert-badges");
+      certBadges.innerHTML = "";
+      BADGES.forEach((b) => {
+        const chip = document.createElement("span");
+        chip.className = "badge-chip" + (state.badges.has(b.id) ? " earned" : "");
+        chip.textContent = `${b.icon} ${b.name}`;
+        certBadges.appendChild(chip);
+      });
+
+      const reviewList = document.getElementById("result-review-list");
       reviewList.innerHTML = "";
+      Object.values(state.answersLog)
+        .sort((a, b) => a.id - b.id)
+        .forEach((entry) => {
+          const item = document.createElement("div");
+          item.className = `review-item ${entry.isCorrect ? "correct" : "wrong"}`;
+          item.innerHTML = `
+            <div style="font-weight: 700; margin-bottom: 4px;">${entry.id}. ${escapeHtml(entry.question)}</div>
+            <div style="font-size: 0.9rem;">
+              Jawabanmu: <strong>${escapeHtml(entry.userAnswerText)}</strong> | Kunci: <strong>${escapeHtml(entry.correctAnswerText)}</strong>
+            </div>
+            <div style="font-size: 0.88rem; color: var(--muted); margin-top: 6px;">Pembahasan: ${escapeHtml(entry.explanation)}</div>
+          `;
+          reviewList.appendChild(item);
+        });
 
-      QUESTIONS.forEach((q, idx) => {
-        const chosen = userAnswers[idx];
-        const isCorrect = chosen === q.answer;
-        if (isCorrect) correctCount += 1;
-
-        const item = document.createElement("div");
-        item.className = `review-item ${isCorrect ? "correct" : "wrong"}`;
-
-        const status = document.createElement("span");
-        status.className = `review-status ${isCorrect ? "correct" : "wrong"}`;
-        status.textContent = isCorrect ? "Benar" : "Kurang Tepat";
-
-        const title = document.createElement("div");
-        title.style.fontWeight = "600";
-        title.textContent = `${idx + 1}. ${q.question}`;
-
-        const answerInfo = document.createElement("div");
-        answerInfo.style.fontSize = "0.92rem";
-        answerInfo.style.marginTop = "6px";
-        answerInfo.textContent = `Jawaban kamu: ${LETTERS[chosen]}. ${q.options[chosen]} | Kunci: ${LETTERS[q.answer]}. ${q.options[q.answer]}`;
-
-        const exp = document.createElement("div");
-        exp.className = "review-explanation";
-        exp.textContent = `Pembahasan: ${q.explanation}`;
-
-        item.appendChild(status);
-        item.appendChild(title);
-        item.appendChild(answerInfo);
-        item.appendChild(exp);
-        reviewList.appendChild(item);
-      });
-
-      const score = Math.round((correctCount / QUESTIONS.length) * 100);
-      const name = studentNameInput.value.trim();
-      const cls = studentClassInput.value.trim();
-
-      document.getElementById("result-identity").textContent = cls ? `${name} (${cls})` : name;
-      document.getElementById("result-score").textContent = String(score);
-      document.getElementById("result-summary").textContent = `Kamu menjawab benar ${correctCount} dari ${QUESTIONS.length} soal.`;
-
-      quizScreen.classList.add("hidden");
-      resultScreen.classList.remove("hidden");
+      state.lastScreenBeforeLb = "result";
+      showScreen("screen-result");
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    document.getElementById("btn-start").addEventListener("click", () => {
-      const name = studentNameInput.value.trim();
-      if (!name) {
-        startError.classList.remove("hidden");
+    function renderLeaderboard() {
+      const container = document.getElementById("leaderboard-body");
+      let list = [];
+      try {
+        const raw = localStorage.getItem(LB_STORAGE_KEY);
+        list = raw ? JSON.parse(raw) : [];
+      } catch (_) {
+        list = [];
+      }
+
+      if (list.length === 0) {
+        container.innerHTML = `<p style="color: var(--muted);">Belum ada catatan skor tersimpan. Selesaikan keempat zona misi untuk masuk ke papan peringkat!</p>`;
         return;
       }
-      startError.classList.add("hidden");
-      const cls = studentClassInput.value.trim();
-      metaStudent.textContent = cls ? `Peserta: ${name} (${cls})` : `Peserta: ${name}`;
-      startScreen.classList.add("hidden");
-      quizScreen.classList.remove("hidden");
-      renderQuestion();
+
+      const rows = list
+        .map(
+          (row, idx) => `
+          <tr>
+            <td><strong>#${idx + 1}</strong></td>
+            <td>${row.avatar} ${escapeHtml(row.name)}</td>
+            <td>${escapeHtml(row.cls)}</td>
+            <td><strong>${row.score}</strong></td>
+            <td>${row.xp} XP</td>
+            <td>${escapeHtml(row.date)}</td>
+          </tr>
+        `
+        )
+        .join("");
+
+      container.innerHTML = `
+        <table class="lb-table">
+          <thead>
+            <tr>
+              <th>Peringkat</th>
+              <th>Penjelajah</th>
+              <th>Kelas</th>
+              <th>Nilai</th>
+              <th>XP</th>
+              <th>Tanggal</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      `;
+    }
+
+    // Event Listeners
+    document.getElementById("btn-sound").addEventListener("click", (e) => {
+      state.soundEnabled = !state.soundEnabled;
+      e.currentTarget.textContent = state.soundEnabled ? "🔊 Suara: Aktif" : "🔇 Suara: Mati";
     });
 
-    btnPrev.addEventListener("click", () => {
-      if (currentIndex > 0) {
-        currentIndex -= 1;
-        renderQuestion();
+    document.getElementById("btn-start-adventure").addEventListener("click", () => {
+      const name = document.getElementById("input-name").value.trim();
+      if (!name) {
+        document.getElementById("welcome-error").classList.remove("hidden");
+        return;
+      }
+      document.getElementById("welcome-error").classList.add("hidden");
+      state.playerName = name;
+      state.playerClass = document.getElementById("input-class").value.trim();
+      playTone("badge");
+      renderZonesMap();
+    });
+
+    document.getElementById("pu-fifty").addEventListener("click", () => {
+      const zone = ZONES[state.activeZoneId];
+      const q = zone.questions[state.activeQuestionIdx];
+      if (state.answeredCurrent || state.powerups.fifty <= 0 || q.type !== "mcq") return;
+
+      const wrongIndices = [0, 1, 2, 3].filter((idx) => idx !== q.answer);
+      // Eliminate two wrong options deterministically shuffled
+      const toEliminate = wrongIndices.sort(() => Math.random() - 0.5).slice(0, 2);
+      document.querySelectorAll("#play-options .option-btn").forEach((btn) => {
+        if (toEliminate.includes(Number(btn.dataset.index))) {
+          btn.classList.add("eliminated");
+        }
+      });
+      state.powerups.fifty -= 1;
+      updatePowerupButtons(q);
+    });
+
+    document.getElementById("pu-hint").addEventListener("click", () => {
+      const zone = ZONES[state.activeZoneId];
+      const q = zone.questions[state.activeQuestionIdx];
+      if (state.answeredCurrent || state.powerups.hint <= 0) return;
+
+      const hintBox = document.getElementById("play-hint-box");
+      hintBox.textContent = `💡 Petunjuk Penjelajah: ${q.hint}`;
+      hintBox.classList.remove("hidden");
+      state.powerups.hint -= 1;
+      updatePowerupButtons(q);
+    });
+
+    document.getElementById("pu-heal").addEventListener("click", () => {
+      if (state.powerups.heal <= 0 || state.hearts >= state.maxHearts) return;
+      state.hearts += 1;
+      state.powerups.heal -= 1;
+      document.getElementById("play-hearts").textContent = formatHearts(state.hearts, state.maxHearts);
+      const zone = ZONES[state.activeZoneId];
+      updatePowerupButtons(zone.questions[state.activeQuestionIdx]);
+      playTone("correct");
+    });
+
+    document.getElementById("btn-submit-fill").addEventListener("click", handleFillAnswer);
+    document.getElementById("play-fill-input").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") handleFillAnswer();
+    });
+
+    document.getElementById("btn-next-question").addEventListener("click", () => {
+      const zone = ZONES[state.activeZoneId];
+      if (state.activeQuestionIdx < zone.questions.length - 1) {
+        state.activeQuestionIdx += 1;
+        renderPlayQuestion();
+      } else {
+        state.completedZones.add(zone.id);
+        if (zone.badgeId) state.badges.add(zone.badgeId);
+        if (state.hearts <= 0) state.hearts = 3;
+
+        if (state.completedZones.size === ZONES.length) {
+          finishAllAndShowCertificate();
+        } else {
+          playTone("badge");
+          renderZonesMap();
+        }
       }
     });
 
-    btnNext.addEventListener("click", () => {
-      if (currentIndex < QUESTIONS.length - 1) {
-        currentIndex += 1;
-        renderQuestion();
-      }
+    document.getElementById("btn-back-map").addEventListener("click", renderZonesMap);
+    document.getElementById("btn-finish-early").addEventListener("click", finishAllAndShowCertificate);
+    document.getElementById("btn-return-map").addEventListener("click", renderZonesMap);
+    document.getElementById("btn-print-cert").addEventListener("click", () => window.print());
+
+    document.getElementById("btn-replay-all").addEventListener("click", () => {
+      state.xp = 0;
+      state.hearts = 5;
+      state.streak = 0;
+      state.maxStreak = 0;
+      state.powerups = { fifty: 2, hint: 2, heal: 1 };
+      state.badges = new Set();
+      state.completedZones = new Set();
+      state.answersLog = {};
+      renderZonesMap();
     });
 
-    btnSubmit.addEventListener("click", showResults);
-
-    document.getElementById("btn-retry").addEventListener("click", () => {
-      currentIndex = 0;
-      userAnswers = new Array(QUESTIONS.length).fill(null);
-      resultScreen.classList.add("hidden");
-      quizScreen.classList.remove("hidden");
-      renderQuestion();
-      window.scrollTo({ top: 0, behavior: "smooth" });
+    document.getElementById("btn-open-lb").addEventListener("click", () => {
+      renderLeaderboard();
+      showScreen("screen-leaderboard");
     });
 
-    document.getElementById("btn-print").addEventListener("click", () => {
-      window.print();
+    document.getElementById("btn-close-lb").addEventListener("click", () => {
+      const map = {
+        welcome: "screen-welcome",
+        map: "screen-map",
+        play: "screen-play",
+        result: "screen-result"
+      };
+      showScreen(map[state.lastScreenBeforeLb] || "screen-welcome");
     });
+
+    document.getElementById("btn-clear-lb").addEventListener("click", () => {
+      try {
+        localStorage.removeItem(LB_STORAGE_KEY);
+      } catch (_) {}
+      renderLeaderboard();
+    });
+
+    // Init
+    renderAvatars();
   </script>
 </body>
 </html>
